@@ -22,6 +22,7 @@ interface FetchProductsErrorAction {
 export interface IProduct {
     title: string;
     description: string;
+    category: string;
     price: number;
 }
 

@@ -1,35 +1,36 @@
 import {
-    Alert,
-    AlertIcon,
     Button, Card, CardBody, CardHeader,
     FormControl,
     FormErrorMessage,
     FormHelperText,
     FormLabel,
     Heading,
-    Input,
-    Stack
+    Input, Select,
+    Stack, useToast
 } from "@chakra-ui/react";
 import {ChangeEventHandler, useState} from "react";
-import {AddIcon, DownloadIcon} from "@chakra-ui/icons";
+import {AddIcon} from "@chakra-ui/icons";
 import {useActions} from "../hooks/useActions";
+import {useTypedSelector} from "../hooks/useTypedSelector";
 
 
 const AdminPanelAddProduct = () => {
     const [product, setProduct] = useState({
         title: '',
         description: '',
-        price: 0
+        price: 0,
+        category: ''
     })
 
     const {createProduct} = useActions()
+    const toast = useToast()
+    const {categories} = useTypedSelector(state => state.category)
 
     const handleTitleChange:ChangeEventHandler<HTMLInputElement> = (e) => {
         setProduct(prevState => ({
             ...prevState,
             title: e.target.value
         }))
-
     }
 
     const handlePriceChange:ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -44,6 +45,37 @@ const AdminPanelAddProduct = () => {
             ...prevState,
             description: e.target.value
         }))
+    }
+
+    const handleCategoryChange:ChangeEventHandler<HTMLSelectElement> = (e) => {
+        setProduct(prevState => ({
+            ...prevState,
+            category: e.target.value
+        }))
+    }
+
+    const submitCreateButton = () => {
+        if (product.title !== ''
+            && product.description !== ''
+            && product.price > 0
+            && product.category !== '' ) {
+            createProduct(product)
+            toast({
+                title: 'Продукт создан.',
+                description: "Мы создали с вами успешно создали продукт.",
+                status: 'success',
+                duration: 1500,
+                isClosable: true,
+            })
+        } else {
+            toast({
+                title: 'Ошибка при создании категории.',
+                description: 'Заполните все поля',
+                status: 'error',
+                duration: 1500,
+                isClosable: true,
+            })
+        }
     }
 
     return (
@@ -91,29 +123,44 @@ const AdminPanelAddProduct = () => {
                                 </FormHelperText>
                             )}
                         </FormControl>
-                        <FormControl>
-                            <FormLabel>Картинка</FormLabel>
-                            <Stack isInline={true} alignItems='center'>
-                                <Button colorScheme='facebook' leftIcon={<DownloadIcon />}>
-                                    Загрузить
-                                </Button>
-                                {/*{true ? (*/}
-                                <Alert status='error' borderRadius='6' w='auto'>
-                                    <AlertIcon />
-                                    Картинка не загружена
-                                </Alert>
-                                {/*) : (*/}
-                                {/*    <Alert status='success' borderRadius='6' w='auto'>*/}
-                                {/*        <AlertIcon />*/}
-                                {/*        Все хорошо✓*/}
-                                {/*    </Alert>*/}
-                                {/*)}*/}
-                            </Stack>
+                        <FormControl isInvalid={product.price === 0}>
+                            <FormLabel>Категория продукта</FormLabel>
+                            <Select placeholder='Выберите категорию' onChange={handleCategoryChange}>
+                                {categories.map((category, i) => (
+                                    <option key={i} value={category.title}>{category.title}</option>
+                                ))}
+                            </Select>
+                            {product.category === '' ? (
+                                <FormErrorMessage>Выберите категорию.</FormErrorMessage>
+                            ) : (
+                                <FormHelperText>
+                                    Все хорошо✓
+                                </FormHelperText>
+                            )}
                         </FormControl>
-                        <Button colorScheme='whatsapp' leftIcon={<AddIcon />} onClick={()=>{
-                            createProduct(product)
-                            console.log(product)
-                        }}>
+
+
+
+                        {/*<FormControl>*/}
+                        {/*    <FormLabel>Картинка</FormLabel>*/}
+                        {/*    <Stack isInline={true} alignItems='center'>*/}
+                        {/*        <Button colorScheme='facebook' leftIcon={<DownloadIcon />}>*/}
+                        {/*            Загрузить*/}
+                        {/*        </Button>*/}
+                        {/*        {true ? (*/}
+                        {/*        <Alert status='error' borderRadius='6' w='auto'>*/}
+                        {/*            <AlertIcon />*/}
+                        {/*            Картинка не загружена*/}
+                        {/*        </Alert>*/}
+                        {/*        ) : (*/}
+                        {/*            <Alert status='success' borderRadius='6' w='auto'>*/}
+                        {/*                <AlertIcon />*/}
+                        {/*                Все хорошо✓*/}
+                        {/*            </Alert>*/}
+                        {/*        )}*/}
+                        {/*    </Stack>*/}
+                        {/*</FormControl>*/}
+                        <Button colorScheme='whatsapp' leftIcon={<AddIcon />} onClick={submitCreateButton}>
                             Создать продукт
                         </Button>
 

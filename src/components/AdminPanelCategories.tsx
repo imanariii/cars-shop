@@ -8,16 +8,48 @@ import {
     FormLabel,
     Heading,
     Input,
-    Stack
+    Stack, useToast
 } from "@chakra-ui/react";
 import {ChangeEventHandler, useState} from "react";
 import {AddIcon} from "@chakra-ui/icons";
+import {ICategory} from "../types/category";
+import {useTypedSelector} from "../hooks/useTypedSelector";
+import {useActions} from "../hooks/useActions";
 
 
 const AdminPanelCategories = () => {
-    const [input, setInput] = useState('')
+    const [category, setCategory] = useState<ICategory>({
+        title: '',
+        description: ''
+    })
+    const toast = useToast()
 
-    const handleInputChange:ChangeEventHandler<HTMLInputElement> = (e) => setInput(e.target.value)
+    const {categories} = useTypedSelector(state => state.category)
+    const {createCategory} = useActions()
+    const handleTitleChange:ChangeEventHandler<HTMLInputElement> = (e) => setCategory(prevState => ({...prevState, title: e.target.value}))
+    const handleDescriptionChange:ChangeEventHandler<HTMLInputElement> = (e) => setCategory(prevState => ({...prevState, description: e.target.value}))
+
+    const submitCreateButton = () => {
+        if (category.title !== '' && category.description !== '') {
+            createCategory(category)
+            toast({
+                title: 'Категория создана.',
+                description: "Мы создали с вами успешно создали категорию.",
+                status: 'success',
+                duration: 1500,
+                isClosable: true,
+            })
+        } else {
+            toast({
+                title: 'Ошибка при создании категории.',
+                description: 'Заполните все поля',
+                status: 'error',
+                duration: 1500,
+                isClosable: true,
+            })
+        }
+    }
+
     return (
         <Stack>
             <Card>
@@ -29,10 +61,10 @@ const AdminPanelCategories = () => {
                 <CardBody>
                     <Stack>
 
-                        <FormControl isInvalid={input === ''}>
+                        <FormControl isInvalid={category.title === ''}>
                             <FormLabel>Название категории</FormLabel>
-                            <Input type='email' value={input} onChange={handleInputChange} />
-                            {input === '' ? (
+                            <Input type='email' value={category.title} onChange={handleTitleChange} />
+                            {category.title === '' ? (
                                 <FormErrorMessage>Название категории обязательно.</FormErrorMessage>
                             ) : (
                                 <FormHelperText>
@@ -41,10 +73,10 @@ const AdminPanelCategories = () => {
                             )}
                         </FormControl>
 
-                        <FormControl isInvalid={input === ''}>
+                        <FormControl isInvalid={category.description === ''}>
                             <FormLabel>Описание категории</FormLabel>
-                            <Input type='email' value={input} onChange={handleInputChange} />
-                            {input === '' ? (
+                            <Input type='email' value={category.description} onChange={handleDescriptionChange} />
+                            {category.description === '' ? (
                                 <FormErrorMessage>Описание категории обязательно.</FormErrorMessage>
                             ) : (
                                 <FormHelperText>
@@ -53,7 +85,7 @@ const AdminPanelCategories = () => {
                             )}
                         </FormControl>
 
-                        <Button colorScheme='whatsapp' leftIcon={<AddIcon />}>
+                        <Button colorScheme='whatsapp' leftIcon={<AddIcon />} onClick={submitCreateButton}>
                             Создать категорию
                         </Button>
 
@@ -69,7 +101,9 @@ const AdminPanelCategories = () => {
                 </CardHeader>
                 <CardBody>
                     <Stack>
-
+                        {categories.map((category, i) => (
+                            <span key={`${category.title + i}`}>{category.title}</span>
+                        ))}
                     </Stack>
                 </CardBody>
             </Card>

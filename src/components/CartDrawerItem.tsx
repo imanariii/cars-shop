@@ -1,9 +1,6 @@
 import React, {FC, useState} from "react";
 import {Button, ButtonGroup, Card, CardBody, CardFooter, Heading, Input, Stack} from "@chakra-ui/react";
 
-// interface IProps {
-//
-// }
 const CartDrawerItem: FC = ()=> {
     const [count, setCount] = useState(1)
     const incrementCount = () => {

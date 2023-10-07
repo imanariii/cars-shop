@@ -3,15 +3,16 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 
 
 const AdminPanelProducts = () => {
+
     const {products} = useTypedSelector(state=>state.product)
-    console.log(products)
+
     return (
         <>
             <Heading>
                 Все продукты
             </Heading>
-            {products.map(item => (
-                <h1>{item.title}</h1>
+            {products.map((item, i) => (
+                <span>{item.title}</span>
             ))}
         </>
     )

@@ -1,10 +1,12 @@
 import {Button, ButtonGroup, Card, CardBody, CardFooter, Heading, Stack} from "@chakra-ui/react";
 import React, {FC} from "react";
+import {IProduct} from "../types/product";
 
 interface IProps {
-    onOpen: () => void
+    onOpen: () => void,
+    item: IProduct
 }
-const CardItem:FC<IProps> = ({onOpen}) => {
+const CardItem:FC<IProps> = ({onOpen, item}) => {
     return (
         <Card maxW='sm'>
             <CardBody>
@@ -14,13 +16,13 @@ const CardItem:FC<IProps> = ({onOpen}) => {
                     style={{borderRadius: '16px'}}
                 />
                 <Stack mt='6' spacing='3'>
-                    <Heading size='md'>Моторное масло ZIC X7 5W-40 Синтетическое 4 л</Heading>
+                    <Heading size='md'>{item?.title}</Heading>
                     {/*<span style={{color: 'orangered', fontSize: '16px'}}>*/}
                     {/*    Синтетическое моторное масло для двигателей легковых автомобилей.*/}
                     {/*    Для использования в бензиновых, дизельных (без сажевых фильтров) и газовых двигателях легковых автомобилей.*/}
                     {/*</span>*/}
                     <span style={{color: 'orange', fontSize: '24px'}}>
-                        3499₽
+                        {item?.price + '₽'}
                     </span>
                 </Stack>
             </CardBody>
