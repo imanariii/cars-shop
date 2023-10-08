@@ -18,8 +18,10 @@ const AdminPanelAddProduct = () => {
     const [product, setProduct] = useState({
         title: '',
         description: '',
-        price: 0,
-        category: ''
+        price: '',
+        category: '',
+        count: 0,
+        saleCount: 0
     })
 
     const {createProduct} = useActions()
@@ -36,7 +38,7 @@ const AdminPanelAddProduct = () => {
     const handlePriceChange:ChangeEventHandler<HTMLInputElement> = (e) => {
         setProduct(prevState => ({
             ...prevState,
-            price: Number(e.target.value)
+            price: e.target.value
         }))
     }
 
@@ -57,7 +59,7 @@ const AdminPanelAddProduct = () => {
     const submitCreateButton = () => {
         if (product.title !== ''
             && product.description !== ''
-            && product.price > 0
+            && product.price !== ''
             && product.category !== '' ) {
             createProduct(product)
             toast({
@@ -67,6 +69,7 @@ const AdminPanelAddProduct = () => {
                 duration: 1500,
                 isClosable: true,
             })
+            setProduct({title: '', price: '', description: '',category: '', count: 0, saleCount: 0})
         } else {
             toast({
                 title: 'Ошибка при создании категории.',
@@ -90,11 +93,11 @@ const AdminPanelAddProduct = () => {
 
                         <FormControl isInvalid={product.title === ''}>
                             <FormLabel>Название продукта</FormLabel>
-                            <Input type='email' value={product.title} onChange={handleTitleChange} />
+                            <Input value={product.title} onChange={handleTitleChange} focusBorderColor="global.orange" />
                             {product.title === '' ? (
                                 <FormErrorMessage>Название продукта обязательно.</FormErrorMessage>
                             ) : (
-                                <FormHelperText>
+                                <FormHelperText color="green">
                                     Все хорошо✓
                                 </FormHelperText>
                             )}
@@ -102,30 +105,30 @@ const AdminPanelAddProduct = () => {
 
                         <FormControl isInvalid={product.description === ''}>
                             <FormLabel>Описание продукта</FormLabel>
-                            <Input type='email' value={product.description} onChange={handleDescriptionChange} />
+                            <Input value={product.description} onChange={handleDescriptionChange} focusBorderColor="global.orange" />
                             {product.description === '' ? (
                                 <FormErrorMessage>Описание продукта обязательно.</FormErrorMessage>
                             ) : (
-                                <FormHelperText>
+                                <FormHelperText color="green">
                                     Все хорошо✓
                                 </FormHelperText>
                             )}
                         </FormControl>
 
-                        <FormControl isInvalid={product.price === 0}>
+                        <FormControl isInvalid={product.price === ''}>
                             <FormLabel>Цена продукта</FormLabel>
-                            <Input type='email' value={product.price} onChange={handlePriceChange} />
-                            {product.price === 0 ? (
+                            <Input type='number' value={product.price} onChange={handlePriceChange} focusBorderColor="global.orange" />
+                            {product.price === '' ? (
                                 <FormErrorMessage>Цена продукта должна быть больше 0.</FormErrorMessage>
                             ) : (
-                                <FormHelperText>
+                                <FormHelperText color="green">
                                     Все хорошо✓
                                 </FormHelperText>
                             )}
                         </FormControl>
-                        <FormControl isInvalid={product.price === 0}>
+                        <FormControl isInvalid={product.category === ''}>
                             <FormLabel>Категория продукта</FormLabel>
-                            <Select placeholder='Выберите категорию' onChange={handleCategoryChange}>
+                            <Select placeholder='Выберите категорию' onChange={handleCategoryChange} focusBorderColor="global.orange" >
                                 {categories.map((category, i) => (
                                     <option key={i} value={category.title}>{category.title}</option>
                                 ))}
@@ -133,7 +136,7 @@ const AdminPanelAddProduct = () => {
                             {product.category === '' ? (
                                 <FormErrorMessage>Выберите категорию.</FormErrorMessage>
                             ) : (
-                                <FormHelperText>
+                                <FormHelperText color="green">
                                     Все хорошо✓
                                 </FormHelperText>
                             )}

@@ -13,7 +13,7 @@ const AdminPage = () => {
                    alignItems="center"
                    p='12px 24px'>
                 <Link to='../'><Button colorScheme='gray'>Перейти на сайт</Button></Link>
-                <Heading textAlign='left' color='global.orange'>Добро пожаловать! <br/> Администратор</Heading>
+                <Heading textAlign='left' color='global.orange'>AdminPanel</Heading>
             </Stack>
             <Tabs isFitted variant='enclosed'>
                 <TabList>

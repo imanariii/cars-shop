@@ -23,7 +23,9 @@ export interface IProduct {
     title: string;
     description: string;
     category: string;
-    price: number;
+    count: number;
+    saleCount: number;
+    price: string;
 }
 
 interface ProductCreateAction {

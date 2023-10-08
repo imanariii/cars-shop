@@ -8,7 +8,7 @@ import {
     FormLabel,
     Heading,
     Input,
-    Stack, useToast
+    Stack, Table, TableCaption, TableContainer, Tbody, Td, Th, Thead, Tr, useToast
 } from "@chakra-ui/react";
 import {ChangeEventHandler, useState} from "react";
 import {AddIcon} from "@chakra-ui/icons";
@@ -39,6 +39,7 @@ const AdminPanelCategories = () => {
                 duration: 1500,
                 isClosable: true,
             })
+            setCategory({title: '', description: ''})
         } else {
             toast({
                 title: 'Ошибка при создании категории.',
@@ -63,11 +64,11 @@ const AdminPanelCategories = () => {
 
                         <FormControl isInvalid={category.title === ''}>
                             <FormLabel>Название категории</FormLabel>
-                            <Input type='email' value={category.title} onChange={handleTitleChange} />
+                            <Input value={category.title} onChange={handleTitleChange} focusBorderColor="global.orange" />
                             {category.title === '' ? (
                                 <FormErrorMessage>Название категории обязательно.</FormErrorMessage>
                             ) : (
-                                <FormHelperText>
+                                <FormHelperText color='green'>
                                     Все хорошо✓
                                 </FormHelperText>
                             )}
@@ -75,11 +76,11 @@ const AdminPanelCategories = () => {
 
                         <FormControl isInvalid={category.description === ''}>
                             <FormLabel>Описание категории</FormLabel>
-                            <Input type='email' value={category.description} onChange={handleDescriptionChange} />
+                            <Input value={category.description} onChange={handleDescriptionChange} focusBorderColor="global.orange" />
                             {category.description === '' ? (
                                 <FormErrorMessage>Описание категории обязательно.</FormErrorMessage>
                             ) : (
-                                <FormHelperText>
+                                <FormHelperText color='green'>
                                     Все хорошо✓
                                 </FormHelperText>
                             )}
@@ -100,11 +101,39 @@ const AdminPanelCategories = () => {
                     </Heading>
                 </CardHeader>
                 <CardBody>
-                    <Stack>
-                        {categories.map((category, i) => (
-                            <span key={`${category.title + i}`}>{category.title}</span>
-                        ))}
-                    </Stack>
+                    <TableContainer>
+                        <Table variant='striped' colorScheme='orange'>
+                            <TableCaption>Интернет-магазин - CarsHelper</TableCaption>
+                            <Thead>
+                                <Tr>
+                                    <Th>ID</Th>
+                                    <Th>Наименование</Th>
+                                    <Th>Описание</Th>
+                                    <Th>Действия</Th>
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                    {categories.map((category, i) => (
+                                        <Tr>
+                                            <Td>{i}</Td>
+                                            <Td>{category.title}</Td>
+                                            <Td>{category.description}</Td>
+                                            <Td>
+                                                <Button colorScheme="orange">Редактировать</Button>
+                                                <Button colorScheme="red">Удалить</Button>
+                                            </Td>
+                                        </Tr>
+                                    ))}
+                            </Tbody>
+                            {/*<Tfoot>*/}
+                            {/*    <Tr>*/}
+                            {/*        <Th>To convert</Th>*/}
+                            {/*        <Th>into</Th>*/}
+                            {/*        <Th isNumeric>multiply by</Th>*/}
+                            {/*    </Tr>*/}
+                            {/*</Tfoot>*/}
+                        </Table>
+                    </TableContainer>
                 </CardBody>
             </Card>
         </Stack>
