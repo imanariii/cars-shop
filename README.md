@@ -1,8 +1,7 @@
 # Название проекта
 Целью данного пет-проекта является написание интернет-магазина для относительно новом мне стеке. 
-![Build Status](https://travis-ci.org/xdan/jodit.svg?branch=master)]
-![Build Status](https://github.com/imanariii/cars-shop/workflows/{ACTIONNAME}/badge.svg)]
-![Build Status](https://github.com/xdan/jodit/workflows/Run%20tests/badge.svg)]
+![Build Status](https://travis-ci.org/xdan/jodit.svg?branch=master)
+![Build Status](https://github.com/xdan/jodit/workflows/Run%20tests/badge.svg)
 
 ## Содержание
 - [Технологии](#технологии)
