@@ -13,8 +13,12 @@
 - [Команда проекта](#команда-проекта)
 
 ## Технологии
-- [GatsbyJS](https://www.gatsbyjs.com/)
+- [React](https://ru.legacy.reactjs.org/)
+- [Mui](https://mui.com/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [Chakra](https://chakra-ui.com/)
+- [ReactRouter](https://reactrouter.com/en/main)
+- [Axios](https://axios-http.com/ru/docs/intro)
 - ...
 
 ## Использование
@@ -54,15 +58,18 @@ npm run build
 Если у вас есть желание помочь, предложить ваши идеи буду рад вам у себя в telegrame
 
 ## FAQ 
-Если потребители вашего кода часто задают одни и те же вопросы, добавьте ответы на них в этом разделе.
+Этот раздел будет дополняться
 
 ### Зачем вы разработали этот проект?
 Чтобы был.
 
 ## To do
 - [x] Добавить крутое README
-- [ ] Всё переписать
-- [ ] ...
+- [ ] Доработка Front-End
+- [ ] Доработка AdminPage
+- [ ] Рефакторинг
+- [ ] Адаптив
+- [ ] Подвязка Back-End`а
 
 ## Команда проекта
 Оставьте пользователям контакты и инструкции, как связаться с командой разработки.
@@ -70,4 +77,9 @@ npm run build
 - [Сангишиев Тангатар](tg://resolve?domain=shark_69kg) — Front-End Engineer
 
 ## Источники
-Если вы чем-то вдохновлялись, расскажите об этом: где брали идеи, какие туториалы смотрели, ссылки на исходники кода. 
+Тем как юзать технологии в основном я учился у:
+[Тимур Улби](https://www.youtube.com/@UlbiTV)
+[Archakov](https://www.youtube.com/@ArchakovBlog)
+
+
+
