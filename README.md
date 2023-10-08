@@ -1,46 +1,85 @@
-# Getting Started with Create React App
+# Название проекта
+Целью данного пет-проекта является написание интернет-магазина для относительно новом мне стеке. 
+![Build Status](https://travis-ci.org/xdan/jodit.svg?branch=master)
+![Build Status](https://github.com/xdan/jodit/workflows/Run%20tests/badge.svg)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Содержание
+- [Технологии](#технологии)
+- [Начало работы](#начало-работы)
+- [Тестирование](#тестирование)
+- [Deploy и CI/CD](#deploy-и-ci/cd)
+- [Contributing](#contributing)
+- [To do](#to-do)
+- [Команда проекта](#команда-проекта)
 
-## Available Scripts
+## Технологии
+- [React](https://ru.legacy.reactjs.org/)
+- [Mui](https://mui.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Chakra](https://chakra-ui.com/)
+- [ReactRouter](https://reactrouter.com/en/main)
+- [Axios](https://axios-http.com/ru/docs/intro)
+- ...
 
-In the project directory, you can run:
+## Использование
+Вы можете установить проект себе локально с помощью команды:
 
-### `npm start`
+```
+$git clone https://github.com/imanariii/cars-shop
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Разработка
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Требования
+Для установки и запуска проекта, необходим [NodeJS](https://nodejs.org/) v8+.
 
-### `npm test`
+### Установка зависимостей
+Для установки зависимостей, выполните команду:
+```sh
+$ npm i
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Запуск Development сервера
+Чтобы запустить сервер для разработки, выполните команду:
+```sh
+npm start
+```
 
-### `npm run build`
+### Создание билда
+Чтобы выполнить production сборку, выполните команду: 
+```sh
+npm run build
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Deploy и CI/CD
+Этот раздел будет дополняться
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Contributing
+Если у вас есть желание помочь, предложить ваши идеи буду рад вам у себя в telegrame
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## FAQ 
+Этот раздел будет дополняться
 
-### `npm run eject`
+### Зачем вы разработали этот проект?
+Чтобы был.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## To do
+- [x] Добавить крутое README
+- [ ] Доработка Front-End
+- [ ] Доработка AdminPage
+- [ ] Рефакторинг
+- [ ] Адаптив
+- [ ] Подвязка Back-End`а
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Команда проекта
+Оставьте пользователям контакты и инструкции, как связаться с командой разработки.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- [Сангишиев Тангатар](tg://resolve?domain=shark_69kg) — Front-End Engineer
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Источники
+Тем как юзать технологии в основном я учился у:
+[Тимур Улби](https://www.youtube.com/@UlbiTV)
+[Archakov](https://www.youtube.com/@ArchakovBlog)
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
