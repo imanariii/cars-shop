@@ -20,13 +20,11 @@ export const fetchProducts = () => {
 export const createProduct = (product: IProduct) => {
     return async (dispatch: Dispatch<ProductAction>) => {
         try {
-            console.log(product)
             dispatch({
                 type: ProductActionTypes.PRODUCT_CREATE,
                 payload: product
             })
         } catch (e) {
-            console.log("Ошибка при создании продукта")
             dispatch({type: ProductActionTypes.FETCH_PRODUCTS_ERROR, payload: "Ошибка при создании продукта"})
         }
     }

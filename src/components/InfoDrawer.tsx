@@ -1,6 +1,17 @@
-import {Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay} from "@chakra-ui/react";
-import ActiveCartInfo from "./ActiveCartInfo";
+import {
+    Button,
+    Card, CardBody, CardFooter, Divider,
+    Drawer,
+    DrawerBody,
+    DrawerCloseButton,
+    DrawerContent,
+    DrawerHeader,
+    DrawerOverlay, Heading, Stack, Skeleton
+} from "@chakra-ui/react";
 import React, {FC} from "react";
+import CategoryName from "./CategoryName";
+import {useTypedSelector} from "../hooks/useTypedSelector";
+import {useActions} from "../hooks/useActions";
 
 
 interface IProps {
@@ -9,14 +20,75 @@ interface IProps {
 }
 
 const InfoDrawer:FC<IProps> = ({onClose, isOpen}) => {
+    const {info, loading, error} = useTypedSelector(state => state.infoProduct)
+    const {setInfoProduct} = useActions()
+    console.log(loading)
+    if(error) return <h1>Ошибка</h1>
     return (
-        <Drawer placement='left' onClose={onClose} isOpen={isOpen} size='xl'>
+        <Drawer placement='left' onClose={() => {
+            onClose()
+            setInfoProduct(null)
+        }} isOpen={isOpen} size='xl'>
             <DrawerOverlay />
             <DrawerContent>
                 <DrawerCloseButton />
                 <DrawerHeader borderBottomWidth='1px'>Информация о товаре</DrawerHeader>
                 <DrawerBody>
-                    <ActiveCartInfo />
+                    <Card bg="transparent">
+                        <CardBody bg='transparent' width="100%" minHeight='80vh'>
+                            <Stack  isInline={true}>
+                                <Skeleton isLoaded={!loading}>
+                                    <img
+                                        src='https://ir.ozone.ru/s3/multimedia-d/wc1000/6709518337.jpg'
+                                        alt='Green double couch with wooden legs'
+                                        style={{borderRadius: '16px'}}
+                                        width="300px"
+                                        height="300px"
+                                    />
+                                </Skeleton>
+
+
+                                <Stack mt='6' spacing='3'>
+                                    <Skeleton isLoaded={!loading}>
+                                        <Heading size='md'>{info?.title}</Heading>
+                                    </Skeleton>
+
+                                        <span style={{color: '#343434', fontWeight: 600, fontSize: '16px'}}>
+                                            Категория :
+                                            <Skeleton isLoaded={!loading}>
+                                                <CategoryName title={'Масло'} />
+                                            </Skeleton>
+                                        </span>
+                                    <Stack isInline={true} alignItems="center">
+                                        <span style={{color: '#343434', fontWeight: 600, fontSize: '16px'}}>
+                                            Цена :
+                                        </span>
+                                        <Skeleton isLoaded={!loading}>
+                                            <span style={{color: 'orange', fontSize: '24px'}}>
+                                                3499₽
+                                            </span>
+                                        </Skeleton>
+                                    </Stack>
+                                </Stack>
+                            </Stack>
+                            <Stack marginTop='24px'>
+                                <span style={{color: '#343434', fontWeight: 600, fontSize: '16px'}}>
+                                    Описание :
+                                </span>
+                                <Skeleton isLoaded={!loading}>
+                                    <span style={{color: '#343434', fontSize: '16px'}}>
+                                        {info?.description}
+                                    </span>
+                                </Skeleton>
+                            </Stack>
+                        </CardBody>
+                        <Divider/>
+                        <CardFooter justifyContent='flex-end'>
+                            <Button variant='solid' colorScheme='orange'>
+                                Добавить в корзину
+                            </Button>
+                        </CardFooter>
+                    </Card>
                 </DrawerBody>
             </DrawerContent>
         </Drawer>
