@@ -6,10 +6,9 @@ import {ICartProduct} from "../types/cart";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 
 interface IProps {
-    onOpen: () => void,
     item: IProduct
 }
-const CardItem:FC<IProps> = ({onOpen, item}) => {
+const CardItem:FC<IProps> = ({item}) => {
     const {setInfoProduct} = useActions()
     const {items} = useTypedSelector(state => state.cart)
 
@@ -22,7 +21,7 @@ const CardItem:FC<IProps> = ({onOpen, item}) => {
         count: 1,
         category: item.category
     }
-    const {addCart} = useActions()
+    const {addCart, onInfo} = useActions()
 
 
     return (
@@ -58,7 +57,7 @@ const CardItem:FC<IProps> = ({onOpen, item}) => {
                     </Button>
                     <Button variant='ghost' colorScheme='orange' onClick={() => {
                         setInfoProduct(item)
-                        onOpen()
+                        onInfo(true)
                     }}>
                         Подробнее
                     </Button>

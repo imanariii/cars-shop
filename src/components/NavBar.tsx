@@ -5,15 +5,14 @@ import {
     Stack,
     Tab,
     TabList,
-    Tabs,
-    useDisclosure
+    Tabs
 } from "@chakra-ui/react";
 import {ShoppingCart} from "@mui/icons-material";
 import React from "react";
-import CartDrawer from "./CartDrawer";
 import Logo from "./Logo";
+import {useActions} from "../hooks/useActions";
 const NavBar = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const {onCart} = useActions()
     return (
         <>
             <Card padding="24px 10%" bg="global.grey" borderRadius='0'>
@@ -36,7 +35,7 @@ const NavBar = () => {
                         </Tabs>
                     </Stack>
                     <IconButton
-                        onClick={onOpen}
+                        onClick={() => onCart(true)}
                         bg='global.orange'
                         aria-label='Корзина'
                         title='text'
@@ -44,7 +43,6 @@ const NavBar = () => {
                     />
                 </Stack>
             </Card>
-            <CartDrawer onClose={onClose} isOpen={isOpen} />
         </>
     )
 }

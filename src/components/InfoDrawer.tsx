@@ -13,22 +13,17 @@ import CategoryName from "./CategoryName";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useActions} from "../hooks/useActions";
 
-
-interface IProps {
-    onClose: () => void,
-    isOpen: boolean
-}
-
-const InfoDrawer:FC<IProps> = ({onClose, isOpen}) => {
+const InfoDrawer:FC = () => {
     const {info, loading, error} = useTypedSelector(state => state.infoProduct)
-    const {setInfoProduct} = useActions()
-    console.log(loading)
+    const { infoShow} = useTypedSelector(state => state.drawer)
+
+    const {setInfoProduct, onInfo} = useActions()
     if(error) return <h1>Ошибка</h1>
     return (
         <Drawer placement='left' onClose={() => {
-            onClose()
+            onInfo(false)
             setInfoProduct(null)
-        }} isOpen={isOpen} size='xl'>
+        }} isOpen={infoShow} size='xl'>
             <DrawerOverlay />
             <DrawerContent>
                 <DrawerCloseButton />

@@ -14,20 +14,18 @@ import {useTypedSelector} from "../hooks/useTypedSelector";
 import {useActions} from "../hooks/useActions";
 
 
-interface IProps {
-    isOpen: boolean,
-    onClose: () => void
-}
-
-const CartDrawer:FC<IProps> = ({isOpen, onClose}) => {
+const CartDrawer:FC = () => {
     const {items} = useTypedSelector(state => state.cart)
-    const {resetCart} = useActions()
+
+    const {cartShow} = useTypedSelector(state => state.drawer)
+
+    const {resetCart, onInfo} = useActions()
     const toast = useToast()
     return (
         <Drawer
-            isOpen={isOpen}
+            isOpen={cartShow}
             placement='right'
-            onClose={onClose}
+            onClose={() => onInfo(false)}
             size="lg"
         >
             <DrawerOverlay />
@@ -43,7 +41,7 @@ const CartDrawer:FC<IProps> = ({isOpen, onClose}) => {
 
                 <DrawerFooter>
                     <Button variant='outline' mr={3} onClick={() => {
-                        onClose()
+                        onInfo(false)
                         resetCart()
                         toast({
                             title: 'Успешно.',
