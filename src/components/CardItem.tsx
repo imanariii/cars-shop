@@ -1,7 +1,9 @@
-import {Button, ButtonGroup, Card, CardBody, CardFooter, Heading, Stack} from "@chakra-ui/react";
+import {Button, ButtonGroup, Card, CardBody, CardFooter, Heading, Stack, useToast} from "@chakra-ui/react";
 import React, {FC} from "react";
 import {IProduct} from "../types/product";
 import {useActions} from "../hooks/useActions";
+import {ICartProduct} from "../types/cart";
+import {useTypedSelector} from "../hooks/useTypedSelector";
 
 interface IProps {
     onOpen: () => void,
@@ -9,6 +11,20 @@ interface IProps {
 }
 const CardItem:FC<IProps> = ({onOpen, item}) => {
     const {setInfoProduct} = useActions()
+    const {items} = useTypedSelector(state => state.cart)
+
+    const toast = useToast()
+
+    const itemCart: ICartProduct = {
+        id: items.length+1,
+        title: item.title,
+        price: +item.price,
+        count: 1,
+        category: item.category
+    }
+    const {addCart} = useActions()
+
+
     return (
         <Card maxW='sm'>
             <CardBody>
@@ -27,7 +43,17 @@ const CardItem:FC<IProps> = ({onOpen, item}) => {
             {/*<Divider/>*/}
             <CardFooter>
                 <ButtonGroup spacing='2'>
-                    <Button variant='solid' colorScheme='orange'>
+                    <Button variant='solid' colorScheme='orange' onClick={() => {
+                        addCart(itemCart)
+                        toast({
+                            title: 'Продукт добавлен в корзину.',
+                            description: "Мы успешно добавили продукт в корзину.",
+                            status: 'success',
+                            duration: 1500,
+                            isClosable: true,
+                        })
+
+                    }}>
                         Добавить в корзину
                     </Button>
                     <Button variant='ghost' colorScheme='orange' onClick={() => {

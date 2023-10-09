@@ -15,6 +15,9 @@ export const cartReducer = (state= initialState, action:CartAction):CartState =>
             let removedCartItemsList = state.items.filter(item => item.id !== action.payload)
             return {loading:false, error:null, items: removedCartItemsList}
 
+        case CartActionTypes.RESET_CART:
+            return {loading:false, error:null, items: []}
+
         case CartActionTypes.EDIT_COUNT:
             let editCountCartItemList:ICartProduct[] = []
             state.items.forEach(item => {

@@ -1,23 +1,46 @@
 import React, {FC, useState} from "react";
-import {Button, ButtonGroup, Card, CardBody, CardFooter, Heading, Input, Stack} from "@chakra-ui/react";
+import {Button, ButtonGroup, Card, CardBody, CardFooter, Heading, Input, Stack, useToast} from "@chakra-ui/react";
+import {ICartProduct} from "../types/cart";
+import {useActions} from "../hooks/useActions";
 
-const CartDrawerItem: FC = ()=> {
+const CartDrawerItem: FC<ICartProduct> = (item)=> {
     const [count, setCount] = useState(1)
+    const {editCountCart, removeCart} = useActions()
+    const toast = useToast()
+
     const incrementCount = () => {
         if(count < 3) {
             setCount(prevState => prevState + 1)
+            editCountCart({id: item.id, count: count})
         } else {
-            alert('Розничный заказ: до 3 шт')
+            toast({
+                title: 'Ошибка.',
+                description: "Максимальное кол-во 3шт.",
+                status: 'error',
+                duration: 1500,
+                isClosable: true,
+            })
         }
     }
 
     const decrementCount = () => {
         if(count > 1) {
             setCount(prevState => prevState-1)
+            editCountCart({id: item.id, count: count})
         } else {
-            alert('Минимум 1 шт')
+            removeCart(item.id)
+            toast({
+                title: 'Успешно.',
+                description: "Товар удален.",
+                status: 'success',
+                duration: 1500,
+                isClosable: true,
+            })
         }
     }
+
+
+
     return (
         <Card>
             <CardBody>
@@ -27,9 +50,9 @@ const CartDrawerItem: FC = ()=> {
                         alt='Green double couch with wooden legs'
                         style={{borderRadius: '16px', width: '100px', height: '100px'}}
                     />
-                        <Heading size='md'>Моторное масло ZIC X7 5W-40 Синтетическое 4 л</Heading>
+                        <Heading size='md'>{item.title}</Heading>
                         <span style={{color: 'orange', fontSize: '24px'}}>
-                        3499₽
+                        {item.price}₽
                     </span>
                 </Stack>
             </CardBody>
@@ -40,7 +63,16 @@ const CartDrawerItem: FC = ()=> {
                         <Input value={count} readOnly={true} width="50px" textAlign='center' />
                         <Button onClick={incrementCount}>+</Button>
                     </Stack>
-                    <Button variant='solid' colorScheme='orange'>
+                    <Button variant='solid' colorScheme='orange' onClick={() => {
+                        removeCart(item.id)
+                        toast({
+                            title: 'Успешно.',
+                            description: "Товар удален.",
+                            status: 'success',
+                            duration: 1500,
+                            isClosable: true,
+                        })
+                    }}>
                         Удалить
                     </Button>
                     <Button variant='ghost' colorScheme='orange'>

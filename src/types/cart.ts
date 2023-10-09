@@ -1,12 +1,17 @@
 export enum CartActionTypes {
     ADD_PRODUCT = 'ADD_PRODUCT',
     REMOVE_PRODUCT = "REMOVE_PRODUCT",
+    RESET_CART = 'RESET_CART',
     EDIT_COUNT = "EDIT_COUNT",
     ERROR = "ERROR",
 }
 interface AddProductAction {
     type: CartActionTypes.ADD_PRODUCT;
     payload: ICartProduct;
+}
+
+interface ResetCartAction {
+    type: CartActionTypes.RESET_CART
 }
 
 interface RemoveProductAction {
@@ -42,4 +47,4 @@ export interface CartState {
     error: null | string;
 }
 
-export type CartAction = ErrorAction | EditCountAction | AddProductAction | RemoveProductAction;
+export type CartAction = ErrorAction | EditCountAction | AddProductAction | RemoveProductAction | ResetCartAction;

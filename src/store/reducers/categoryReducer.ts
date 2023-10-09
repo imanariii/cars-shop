@@ -1,7 +1,13 @@
 import {CategoryAction, CategoryActionTypes, CategoryState} from "../../types/category";
 
 const initialState: CategoryState= {
-    categories: [],
+    categories: [{
+        title: 'Масло',
+        description: 'Моторное масло'
+    }, {
+        title: 'Колодки',
+        description: 'Колодки автомобильные'
+    }],
     loading: false,
     error: null
 }

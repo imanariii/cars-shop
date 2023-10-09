@@ -56,7 +56,7 @@ const InfoDrawer:FC<IProps> = ({onClose, isOpen}) => {
                                         <span style={{color: '#343434', fontWeight: 600, fontSize: '16px'}}>
                                             Категория :
                                             <Skeleton isLoaded={!loading}>
-                                                <CategoryName title={'Масло'} />
+                                                <CategoryName title={info?.category || '' } />
                                             </Skeleton>
                                         </span>
                                     <Stack isInline={true} alignItems="center">
@@ -65,7 +65,7 @@ const InfoDrawer:FC<IProps> = ({onClose, isOpen}) => {
                                         </span>
                                         <Skeleton isLoaded={!loading}>
                                             <span style={{color: 'orange', fontSize: '24px'}}>
-                                                3499₽
+                                                {info?.price}
                                             </span>
                                         </Skeleton>
                                     </Stack>

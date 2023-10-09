@@ -6,10 +6,12 @@ import {
     DrawerContent,
     DrawerFooter,
     DrawerHeader,
-    DrawerOverlay
+    DrawerOverlay, useToast
 } from "@chakra-ui/react";
 import CartDrawerItem from "./CartDrawerItem";
 import React, {FC} from "react";
+import {useTypedSelector} from "../hooks/useTypedSelector";
+import {useActions} from "../hooks/useActions";
 
 
 interface IProps {
@@ -18,6 +20,9 @@ interface IProps {
 }
 
 const CartDrawer:FC<IProps> = ({isOpen, onClose}) => {
+    const {items} = useTypedSelector(state => state.cart)
+    const {resetCart} = useActions()
+    const toast = useToast()
     return (
         <Drawer
             isOpen={isOpen}
@@ -31,17 +36,23 @@ const CartDrawer:FC<IProps> = ({isOpen, onClose}) => {
                 <DrawerHeader>Корзина</DrawerHeader>
 
                 <DrawerBody>
-                    <CartDrawerItem />
-                    <CartDrawerItem />
-                    <CartDrawerItem />
-                    <CartDrawerItem />
-                    <CartDrawerItem />
-                    <CartDrawerItem />
-                    <CartDrawerItem />
+                    {items && items.map(item => (
+                        <CartDrawerItem {...item} />
+                    ))}
                 </DrawerBody>
 
                 <DrawerFooter>
-                    <Button variant='outline' mr={3} onClick={onClose}>
+                    <Button variant='outline' mr={3} onClick={() => {
+                        onClose()
+                        resetCart()
+                        toast({
+                            title: 'Успешно.',
+                            description: "Корзина очищена.",
+                            status: 'success',
+                            duration: 1500,
+                            isClosable: true,
+                        })
+                    }}>
                         Очистить корзину
                     </Button>
                     <Button colorScheme='orange'>Оформить заказ</Button>

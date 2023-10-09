@@ -1,7 +1,21 @@
 import {ProductAction, ProductActionTypes, ProductState} from "../../types/product";
 
 const initialState:ProductState = {
-    products: [],
+    products: [{
+        title: 'Тест1',
+        description: 'Описание тестового продукта',
+        saleCount: 0,
+        count: 0,
+        price: '100',
+        category: 'Масло'
+    }, {
+        title: 'Тест2',
+        description: 'Описание тестового продукта',
+        saleCount: 0,
+        count: 0,
+        price: '100',
+        category: 'Колодки'
+    }],
     loading: false,
     error: null
 }

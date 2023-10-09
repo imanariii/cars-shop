@@ -26,3 +26,28 @@ export const removeCart = (id: number) => {
         }
     }
 }
+
+export const editCountCart = (item: {id: number, count: number}) => {
+    return async (dispatch: Dispatch<CartAction>) => {
+        try {
+            dispatch({
+                type: CartActionTypes.EDIT_COUNT,
+                payload: item
+            })
+        } catch (e) {
+            dispatch({type: CartActionTypes.ERROR, payload: "Ошибка при изменения кол-ва товара в корзине"})
+        }
+    }
+}
+
+export const resetCart = () => {
+    return async (dispatch: Dispatch<CartAction>) => {
+        try {
+            dispatch({
+                type: CartActionTypes.RESET_CART
+            })
+        } catch (e) {
+            dispatch({type: CartActionTypes.ERROR, payload: "Ошибка при очистке корзины"})
+        }
+    }
+}
