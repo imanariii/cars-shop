@@ -1,4 +1,4 @@
-import {Button, ButtonGroup, Card, CardBody, CardFooter, Heading, Stack, useToast} from "@chakra-ui/react";
+import {Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Heading, Stack, useToast} from "@chakra-ui/react";
 import React, {FC} from "react";
 import {IProduct} from "../types/product";
 import {useActions} from "../hooks/useActions";
@@ -23,6 +23,23 @@ const CardItem:FC<IProps> = ({item}) => {
     }
     const {addCart, onInfo} = useActions()
 
+    const onClickButtonAddToCart = () => {
+        addCart(itemCart)
+        console.log(itemCart)
+        toast({
+            title: 'Продукт добавлен в корзину.',
+            description: "Мы успешно добавили продукт в корзину.",
+            status: 'success',
+            duration: 1500,
+            isClosable: true,
+        })
+
+    }
+
+    const onClickButtonInfoProduct = () => {
+        setInfoProduct(item)
+        onInfo(true)
+    }
 
     return (
         <Card maxW='sm'>
@@ -39,26 +56,13 @@ const CardItem:FC<IProps> = ({item}) => {
                     </span>
                 </Stack>
             </CardBody>
-            {/*<Divider/>*/}
+            <Divider/>
             <CardFooter>
                 <ButtonGroup spacing='2'>
-                    <Button variant='solid' colorScheme='orange' onClick={() => {
-                        addCart(itemCart)
-                        toast({
-                            title: 'Продукт добавлен в корзину.',
-                            description: "Мы успешно добавили продукт в корзину.",
-                            status: 'success',
-                            duration: 1500,
-                            isClosable: true,
-                        })
-
-                    }}>
+                    <Button variant='solid' colorScheme='orange' onClick={onClickButtonAddToCart}>
                         Добавить в корзину
                     </Button>
-                    <Button variant='ghost' colorScheme='orange' onClick={() => {
-                        setInfoProduct(item)
-                        onInfo(true)
-                    }}>
+                    <Button variant='ghost' colorScheme='orange' onClick={onClickButtonInfoProduct}>
                         Подробнее
                     </Button>
                 </ButtonGroup>

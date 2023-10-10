@@ -61,7 +61,6 @@ const AdminPanelCategories = () => {
                 </CardHeader>
                 <CardBody>
                     <Stack>
-
                         <FormControl isInvalid={category.title === ''}>
                             <FormLabel>Название категории</FormLabel>
                             <Input value={category.title} onChange={handleTitleChange} focusBorderColor="global.orange" />
@@ -125,13 +124,6 @@ const AdminPanelCategories = () => {
                                         </Tr>
                                     ))}
                             </Tbody>
-                            {/*<Tfoot>*/}
-                            {/*    <Tr>*/}
-                            {/*        <Th>To convert</Th>*/}
-                            {/*        <Th>into</Th>*/}
-                            {/*        <Th isNumeric>multiply by</Th>*/}
-                            {/*    </Tr>*/}
-                            {/*</Tfoot>*/}
                         </Table>
                     </TableContainer>
                 </CardBody>

@@ -8,6 +8,17 @@ const CartDrawerItem: FC<ICartProduct> = (item)=> {
     const {editCountCart, removeCart} = useActions()
     const toast = useToast()
 
+    const onClickButtonRemove = () => {
+        removeCart(item.id)
+        toast({
+            title: 'Успешно.',
+            description: "Товар удален.",
+            status: 'success',
+            duration: 1500,
+            isClosable: true,
+        })
+    }
+
     const incrementCount = () => {
         if(count < 3) {
             setCount(prevState => prevState + 1)
@@ -63,20 +74,8 @@ const CartDrawerItem: FC<ICartProduct> = (item)=> {
                         <Input value={count} readOnly={true} width="50px" textAlign='center' />
                         <Button onClick={incrementCount}>+</Button>
                     </Stack>
-                    <Button variant='solid' colorScheme='orange' onClick={() => {
-                        removeCart(item.id)
-                        toast({
-                            title: 'Успешно.',
-                            description: "Товар удален.",
-                            status: 'success',
-                            duration: 1500,
-                            isClosable: true,
-                        })
-                    }}>
+                    <Button variant='solid' colorScheme='orange' onClick={onClickButtonRemove}>
                         Удалить
-                    </Button>
-                    <Button variant='ghost' colorScheme='orange'>
-                        Подробнее
                     </Button>
                 </ButtonGroup>
             </CardFooter>

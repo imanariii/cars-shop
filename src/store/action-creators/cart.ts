@@ -4,11 +4,13 @@ import {CartAction, CartActionTypes, ICartProduct} from "../../types/cart";
 export const addCart = (product: ICartProduct) => {
     return async (dispatch: Dispatch<CartAction>) => {
         try {
+            console.log(product)
             dispatch({
                 type: CartActionTypes.ADD_PRODUCT,
                 payload: product
             })
         } catch (e) {
+            console.log(e)
             dispatch({type: CartActionTypes.ERROR, payload: "Ошибка при добавлении в корзину"})
         }
     }

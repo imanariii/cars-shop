@@ -16,14 +16,34 @@ import {useActions} from "../hooks/useActions";
 const InfoDrawer:FC = () => {
     const {info, loading, error} = useTypedSelector(state => state.infoProduct)
     const { infoShow} = useTypedSelector(state => state.drawer)
+    const { items } = useTypedSelector(state => state.cart)
 
-    const {setInfoProduct, onInfo} = useActions()
+    const onCloseDrawer = () => {
+        onInfo(false)
+        resetInfoProduct()
+    }
+
+    const onClickButtonAddToCart = () => {
+        if(info !== null) {
+            let itemCart = {
+                id: items.length+1,
+                title: info?.title,
+                price: +info?.price,
+                count: 1,
+                category: `${info?.category}`
+            }
+            addCart(itemCart)
+        }
+
+        onInfo(false)
+        resetInfoProduct()
+    }
+
+    const {onInfo, addCart, resetInfoProduct} = useActions()
+
     if(error) return <h1>Ошибка</h1>
     return (
-        <Drawer placement='left' onClose={() => {
-            onInfo(false)
-            setInfoProduct(null)
-        }} isOpen={infoShow} size='xl'>
+        <Drawer placement='left' onClose={onCloseDrawer} isOpen={infoShow} size='xl'>
             <DrawerOverlay />
             <DrawerContent>
                 <DrawerCloseButton />
@@ -79,7 +99,7 @@ const InfoDrawer:FC = () => {
                         </CardBody>
                         <Divider/>
                         <CardFooter justifyContent='flex-end'>
-                            <Button variant='solid' colorScheme='orange'>
+                            <Button variant='solid' colorScheme='orange' onClick={onClickButtonAddToCart}>
                                 Добавить в корзину
                             </Button>
                         </CardFooter>

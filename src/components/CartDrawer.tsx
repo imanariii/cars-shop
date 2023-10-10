@@ -21,11 +21,26 @@ const CartDrawer:FC = () => {
 
     const {resetCart, onInfo} = useActions()
     const toast = useToast()
+
+    const onCloseDrawer = () => onInfo(false);
+
+    const onClickButtonResetItems = () => {
+        onInfo(false)
+        resetCart()
+        toast({
+            title: 'Успешно.',
+            description: "Корзина очищена.",
+            status: 'success',
+            duration: 1500,
+            isClosable: true,
+        })
+    }
+
     return (
         <Drawer
             isOpen={cartShow}
             placement='right'
-            onClose={() => onInfo(false)}
+            onClose={onCloseDrawer}
             size="lg"
         >
             <DrawerOverlay />
@@ -40,17 +55,7 @@ const CartDrawer:FC = () => {
                 </DrawerBody>
 
                 <DrawerFooter>
-                    <Button variant='outline' mr={3} onClick={() => {
-                        onInfo(false)
-                        resetCart()
-                        toast({
-                            title: 'Успешно.',
-                            description: "Корзина очищена.",
-                            status: 'success',
-                            duration: 1500,
-                            isClosable: true,
-                        })
-                    }}>
+                    <Button variant='outline' mr={3} onClick={onClickButtonResetItems}>
                         Очистить корзину
                     </Button>
                     <Button colorScheme='orange'>Оформить заказ</Button>

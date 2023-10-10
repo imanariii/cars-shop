@@ -14,7 +14,7 @@ export const fetchInfoProduct = (id: number) => {
     }
 }
 
-export const setInfoProduct = (product: IProduct | null) => {
+export const setInfoProduct = (value: IProduct) => {
     return async (dispatch: Dispatch<InfoProductAction>) => {
         try {
             dispatch({
@@ -23,8 +23,18 @@ export const setInfoProduct = (product: IProduct | null) => {
             setTimeout(() =>
                 dispatch({
                     type: InfoProductActionTypes.FETCH_INFO_PRODUCT_SUCCESS,
-                    payload: product
+                    payload: value
                 }), 2000)
+        } catch (e) {
+            dispatch({type: InfoProductActionTypes.FETCH_INFO_PRODUCT_ERROR, payload: "Ошибка при фиксации информации продукта"})
+        }
+    }
+}
+
+export const resetInfoProduct = () => {
+    return async (dispatch: Dispatch<InfoProductAction>) => {
+        try {
+            dispatch({type: InfoProductActionTypes.RESET_INFO_PRODUCT})
         } catch (e) {
             dispatch({type: InfoProductActionTypes.FETCH_INFO_PRODUCT_ERROR, payload: "Ошибка при фиксации информации продукта"})
         }

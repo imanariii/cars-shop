@@ -1,6 +1,6 @@
 export enum DrawerActionTypes {
     SET_CART_DRAWER = "OPEN_CART_DRAWER",
-    SET_INFO_DRAWER = 'RESET_CART',
+    SET_INFO_DRAWER = 'SET_INFO_DRAWER',
     ERROR = "ERROR",
 }
 interface SetCartAction {

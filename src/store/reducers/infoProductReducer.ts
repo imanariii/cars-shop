@@ -13,6 +13,8 @@ export const infoProductReducer = (state= initialState, action: InfoProductActio
             return {loading:true, error:null, info: null}
         case InfoProductActionTypes.FETCH_INFO_PRODUCT_SUCCESS:
             return {loading:false, error:null, info: action.payload}
+        case InfoProductActionTypes.RESET_INFO_PRODUCT:
+            return {loading:false, error:null, info: null}
         case InfoProductActionTypes.FETCH_INFO_PRODUCT_ERROR:
             return {loading:false, error:action.payload, info: null}
         default:
